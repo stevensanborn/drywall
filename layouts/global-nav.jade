@@ -1,0 +1,48 @@
+div.navbar-header
+          a.navbar-brand(href='/')
+            img.navbar-logo(src='/media/logo-symbol-64x64.png', alt='Logo')
+            span.navbar-brand-label #{projectName}
+          button.navbar-toggle.collapsed(data-toggle='collapse', data-target='.my-navbar-collapse')
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+        div.navbar-collapse.my-navbar-collapse.collapse
+
+            ul.nav.navbar-nav
+              li: a(href='/') Home
+              li: a(href='/about/') About
+              
+              if !user || !user.username
+                li: a(href='/signup/') Sign Up
+
+              li: a(href='/contact/') Contact
+              
+              if user && user.username  
+                li.visible-xs: a(href='#{user.defaultReturnUrl}') Account
+                li.visible-xs: a(href='/account/settings/') Settings
+                li.visible-xs: a(href='/logout') Logout
+
+            if user && user.username
+                          
+              div.nav.navbar-nav.navbar-right.dropdown.hidden-xs
+                button.btn.btn-default.dropdown-toggle(type='button' , id='user-dropdown-menu' , aria-expanded='true' , data-toggle="dropdown", aria-haspopup="true") 
+                  i.fa.fa-user 
+                  &nbsp;  #{user.username} &nbsp;
+                  <span class="caret"></span> 
+                  
+                ul.dropdown-menu(aria-labelledby="user-dropdown-menu")
+                    li: a(href='#{user.defaultReturnUrl}',role="navigation")
+                       i.fa.fa-user &nbsp;  Account
+                    
+                    li: a(href='/account/settings/',role="navigation") 
+                      i.fa.fa-cog.fa-fw &nbsp;  Settings
+                      
+                    li: a(href='/logout/',role="navigation") 
+                      i.fa.fa-sign-out &nbsp;  Logout
+                    
+
+            else
+
+              ul.nav.navbar-nav.navbar-right
+                li: a(href='/login/')
+                  i.fa.fa-user  &nbsp; Sign In
