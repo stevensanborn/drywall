@@ -8,7 +8,15 @@ module.exports = function(grunt) {
         files: [
           {
             expand: true, cwd: 'node_modules/bootstrap/',
-            src: ['js/**', 'less/**'], dest: 'public/vendor/bootstrap/'
+            src: ['js/**'], dest: 'public/vendor/bootstrap/'
+          },
+          {
+            expand: true, cwd: 'node_modules/bootstrap/less/',
+            src: ['./**'], dest: './less/vendor/bootstrap/'
+          },
+          {
+            expand: true, cwd: 'node_modules/font-awesome/fonts/',
+            src: ['./**'], dest: './public/fonts/font-awesome/'
           },
           {
             expand: true, cwd: 'node_modules/backbone/',
@@ -16,7 +24,11 @@ module.exports = function(grunt) {
           },
           {
             expand: true, cwd: 'node_modules/font-awesome/',
-            src: ['fonts/**', 'less/**'], dest: 'public/vendor/font-awesome/'
+            src: ['fonts/**'], dest: 'public/vendor/font-awesome/'
+          },
+          {
+            expand: true, cwd: 'node_modules/font-awesome/less',
+            src: ['./**/*.less'], dest: './less/vendor/font-awesome/'
           },
           {
             expand: true, cwd: 'node_modules/html5shiv/dist/',
@@ -171,17 +183,17 @@ module.exports = function(grunt) {
       layouts: {
         files: {
           'public/layouts/core.min.css': [
-            'public/less/bootstrap-build.less',
-            'public/less/font-awesome-build.less',
-            'public/layouts/core.less'
+            'less/vendor/bootstrap/bootstrap-build.less',
+            'less/vendor/font-awesome/font-awesome-build.less',
+            'less/core.less'
           ],
-          'public/layouts/admin.min.css': ['public/layouts/admin.less']
+          'public/layouts/admin.min.css': ['less/admin.less']
         }
       },
       views: {
         files: [{
           expand: true,
-          cwd: 'public/views/',
+          cwd: 'less/views/',
           src: ['**/*.less'],
           dest: 'public/views/',
           ext: '.min.css'
